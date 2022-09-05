@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="bootstrap-phpunit.php">
+    
+    <!-- Indicando qual é o diretório onde as classes de teste se encontram -->
+    <testsuites>
+        <testsuite name="Test Suite">
+            <directory suffix=".php">tests/</directory>
+        </testsuite>
+    </testsuites>
+ 
+<!-- Adicionando filtros, basicamente whitelist (diretórios que serão executados), 
+    dentro temos o exclude (diretórios que não serão executados pelos testes) -->
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+            <exclude>
+                <directory suffix=".php">./vendor/</directory>
+                <directory suffix=".php">src/CDC/Loja/Test</directory>
+                <directory suffix="Interface.php">src/CDC/Loja</directory>
+                <directory suffix="Interface.php">src/CDC/Exemplos</directory>
+                <file>src/CDC/Exemplos/Escritor.php</file>
+                <file>src/CDC/Exemplos/Leitor.php</file>
+            </exclude>
+        </whitelist>
+        <blacklist>
+            <directory suffix=".php">*Test</directory>
+        </blacklist>
+    </filter>
+    <groups>
+        <include>
+            <!--<group>Loja</group>-->
+            <!--<group>MaisAlgumGrupo</group>-->
+        </include>
+        <exclude>
+            <!--<group>NomeDoGrupo</group>-->
+            <!--<group>MaisAlgumGrupo</group>-->
+        </exclude>
+    </groups>
+    <logging>
+        <log type="testdox-text" target="tests/_reports/testdox.txt"/>
+        <log type="testdox-html" target="tests/_reports/testdox.html"/>
+        <log type="coverage-html" target="tests/_reports/coverage" charset="UTF-8" yui="true" highlight="true" lowUpperBound="45" highLowerBound="85" />
+    </logging>
+</phpunit>
