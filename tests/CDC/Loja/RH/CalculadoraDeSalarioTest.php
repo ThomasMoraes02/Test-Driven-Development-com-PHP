@@ -9,32 +9,34 @@ use CDC\Loja\RH\CalculadoraDeSalario;
 
 class CalculadoraDeSalarioTest extends TestCase
 {
+    private $calculadora;
+
+    protected function setUp()
+    {
+        $this->calculadora = new CalculadoraDeSalario();
+        parent::setUp();
+    }
+
     public function testCalculoSalarioDesenvolvedorAbaixoDoLimite()
     {
-        $calculadora = new CalculadoraDeSalario();
-        $desenvolvedor = new Funcionario("Andre", 1500, TabelaCargos::DESENVOLVEDOR);
-
-        $salario = $calculadora->calculaSalario($desenvolvedor);
+        $funcionario = new Funcionario("Andre", 1500, "desenvolvedor");
+        $salario = $this->calculadora->calculaSalario($funcionario);
 
         $this->assertEquals(1500.0 * 0.9, $salario);
     }
 
     public function testCalculoSalarioDesenvolvedorAcimaDoLimite()
     {
-        $calculadora = new CalculadoraDeSalario();
-        $desenvolvedor = new Funcionario("Andre", 4000, TabelaCargos::DESENVOLVEDOR);
-
-        $salario = $calculadora->calculaSalario($desenvolvedor);
+        $funcionario = new Funcionario("Andre", 4000, "desenvolvedor");
+        $salario = $this->calculadora->calculaSalario($funcionario);
 
         $this->assertEquals(4000 * 0.8, $salario);
     }
 
     public function testCalculoSalarioDBAsAbaixoDoLimite()
     {
-        $calculadora = new CalculadoraDeSalario();
-        $desenvolvedor = new Funcionario("Andre", 500, TabelaCargos::DBA);
-
-        $salario = $calculadora->calculaSalario($desenvolvedor);
+        $funcionario = new Funcionario("Andre", 500, "dba");
+        $salario = $this->calculadora->calculaSalario($funcionario);
 
         $this->assertEquals(500 * 0.85, $salario);
     }
